@@ -9,7 +9,7 @@ using System.Threading.Tasks;
     using System.ComponentModel.DataAnnotations;
 #endregion
 
-namespace ChinookClassData.Entities
+namespace ChinookSystem.Data.Entities
 {
     //default class permisison is private
     //annotation to link this class to the sql table

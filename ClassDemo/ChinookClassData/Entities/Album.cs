@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations;
 
 // Entity Validation kicks in on the .SaveChanges() command.
 
-namespace ChinookClassData.Entities
+namespace ChinookSystem.Data.Entities
 {
     [Table("Albums")]
     public class Album
