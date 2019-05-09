@@ -14,10 +14,30 @@ namespace ChinookSystem.Data.Entities
     [Table("Genres")]
     public class Genre
     {
+        private string _Name;
         [Key]
         public int GenreId { get; set; }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    _Name = null;
+                }
+                else
+                {
+                    _Name = value;
+                }
+            }
+        }
+        //navigational properties
+        public virtual ICollection<Track> Tracks { get; set; }
 
     }
 }

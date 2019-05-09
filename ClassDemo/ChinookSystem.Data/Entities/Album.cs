@@ -43,5 +43,26 @@ namespace ChinookSystem.Data.Entities
                 }
             }
         }
+
+        [NotMapped]
+        public string LabelYear
+        {
+            get
+            {
+                if(string.IsNullOrEmpty(ReleaseLabel))
+                {
+                    return "Unknown Label (" + ReleaseYear.ToString() + ")";
+                }
+                else
+                {
+                    return ReleaseLabel + " (" + ReleaseYear.ToString() + ")";
+                }
+            }
+        }
+
+        //navigational properties
+        //these enables the usage of joins in multile tables.
+        public virtual Artist Artist { get; set; }
+        public virtual ICollection<Track> Tracks { get; set; }
     }
 }

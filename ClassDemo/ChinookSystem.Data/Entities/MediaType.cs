@@ -14,10 +14,30 @@ namespace ChinookSystem.Data.Entities
     [Table("MediaTypes")]
     public class MediaType
     {
+        private string _Name;
         [Key]
         public int MediaTypeId { get; set; }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    _Name = null;
+                }
+                else
+                {
+                    _Name = value;
+                }
+            }
+        }
 
+        //navigational properties
+        public virtual ICollection<Track> Tracks { get; set; }
     }
 }
