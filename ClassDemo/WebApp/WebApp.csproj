@@ -428,8 +428,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChinookClassData\ChinookSystem.Data.csproj">
-      <Project>{3deeb88e-70df-4c66-96a3-7f9c8c5bd1cd}</Project>
+    <ProjectReference Include="..\ChinookSystem.Data\ChinookSystem.Data.csproj">
+      <Project>{1f1d588d-3190-4aea-9f1b-768bb2aede95}</Project>
       <Name>ChinookSystem.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\ChinookSystem\ChinookSystem.csproj">

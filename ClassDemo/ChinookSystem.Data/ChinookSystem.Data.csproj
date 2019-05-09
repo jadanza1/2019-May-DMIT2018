@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{128C1E25-52DB-4BF2-AA70-10F7ADE2F30A}</ProjectGuid>
+    <ProjectGuid>{1F1D588D-3190-4AEA-9F1B-768BB2AEDE95}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChinookSystem</RootNamespace>
-    <AssemblyName>ChinookSystem</AssemblyName>
+    <RootNamespace>ChinookSystem.Data</RootNamespace>
+    <AssemblyName>ChinookSystem.Data</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,21 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Album.cs" />
+    <Compile Include="Entities\Artist.cs" />
+    <Compile Include="Entities\Genre.cs" />
+    <Compile Include="Entities\MediaType.cs" />
+    <Compile Include="Entities\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BLL\" />
-    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChinookSystem.Data\ChinookSystem.Data.csproj">
-      <Project>{1f1d588d-3190-4aea-9f1b-768bb2aede95}</Project>
-      <Name>ChinookSystem.Data</Name>
-    </ProjectReference>
+    <Folder Include="DTOs\" />
+    <Folder Include="POCOs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
