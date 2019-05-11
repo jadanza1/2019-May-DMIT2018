@@ -12,35 +12,23 @@ using System.ComponentModel;
 namespace ChinookSystem.BLL
 {
     [DataObject]
-    public class AlbumController
+    public class GenreController
     {
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<Album> Album_List()
+        public List<Genre> Genre_List()
         {
             using (var context = new ChinookSystemContext())
             {
-                return context.Albums.ToList();
+                return context.Genres.ToList();
             }
         }
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public Album Album_Get(int albumId)
+        public Genre Genre_Get(int albumId)
         {
             using (var context = new ChinookSystemContext())
             {
-                return context.Albums.Find(albumId);
-            }
-        }
-
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<Album> Album_GetByArtist(int artistId)
-        {
-            using (var context = new ChinookSystemContext())
-            {
-                var resutls = from x in context.Albums
-                              where x.ArtistId == artistId
-                              select x;
-                return resutls.ToList();
+                return context.Genres.Find(albumId);
             }
         }
     }
