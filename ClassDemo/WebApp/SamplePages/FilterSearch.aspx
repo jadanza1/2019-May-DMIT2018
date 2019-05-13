@@ -25,7 +25,7 @@
                 <asp:TemplateField HeaderText="Album">
                     <ItemTemplate>
                         <asp:Label ID="AlbumTitle" runat="server" Text='<%# Eval("Title") %>'></asp:Label>
-                        <asp:Label ID="AlbumId" runat="server" Text='<%# Eval("Album") %>' Visible="false"></asp:Label>
+                        <asp:Label ID="AlbumId" runat="server" Text='<%# Eval("AlbumId") %>' Visible="false"></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Year">
