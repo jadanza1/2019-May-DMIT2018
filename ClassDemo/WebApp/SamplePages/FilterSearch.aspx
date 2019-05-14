@@ -3,6 +3,7 @@
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
 
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Filter Search</h1>
     <blockquote class="alert alert-info">
@@ -77,7 +78,7 @@
         <fieldset>
             <asp:LinkButton ID="Add_Button" runat="server" OnClick="Add_Button_Click"> Add </asp:LinkButton> &nbsp; &nbsp;
             <asp:LinkButton ID="Update_Button" runat="server" OnClick="Update_Button_Click"> Update</asp:LinkButton> &nbsp; &nbsp;
-            <asp:LinkButton ID="Remove_Button" runat="server" OnClientClick="Are You Sure You Wish to Remove This Album From the Collection?" 
+            <asp:LinkButton ID="Remove_Button" runat="server" OnClientClick="return confirm('Are You Sure You Wish to Remove This Album From the Collection?')" 
                 CausesValidation="false" OnClick="Remove_Button_Click"> Remove </asp:LinkButton> &nbsp; &nbsp;
         </fieldset>
     </div>
