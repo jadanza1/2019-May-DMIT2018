@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="Filter Search" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FilterSearch.aspx.cs" Inherits="WebApp.SamplePages.FilterSearch" %>
 
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Filter Search</h1>
     <blockquote class="alert alert-info">
@@ -7,7 +10,7 @@
         This page will use various form control. This page will Review event driven logic.
     </blockquote>
     <div class="col-md-offset-3">
-        <asp:Label ID="Message" runat="server"></asp:Label>
+       
         <br />
         <br />
         <asp:Label ID="Label1" runat="server" Text="Select an Artist"></asp:Label>
@@ -16,9 +19,12 @@
         </asp:DropDownList>
         &nbsp;&nbsp;
         <asp:LinkButton ID="FetchAlbums" runat="server">Fetch Albums</asp:LinkButton>
-        
+        <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
         <br />
-        <asp:GridView ID="AlbumList" runat="server" DataSourceID="AlbumListODS" AllowPaging="true" PageSize="5">
+        <asp:GridView ID="AlbumList" runat="server" DataSourceID="AlbumListODS" AllowPaging="true" PageSize="5"
+            CssClass="table table-striped">
+            <%-- More Gridview Styling: --%>
+            <%--BorderStyle="None" GridLines="Horizontal"--%>
             <Columns>
                 <asp:CommandField SelectText="View"
                     ShowSelectButton="true" />

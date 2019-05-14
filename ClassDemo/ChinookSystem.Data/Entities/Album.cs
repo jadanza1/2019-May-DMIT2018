@@ -65,4 +65,5 @@ namespace ChinookSystem.Data.Entities
         public virtual Artist Artist { get; set; }
         public virtual ICollection<Track> Tracks { get; set; }
     }
+
 }
