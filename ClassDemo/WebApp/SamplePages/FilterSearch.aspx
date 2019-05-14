@@ -18,16 +18,16 @@
         <asp:DropDownList ID="ArtistList" runat="server">
         </asp:DropDownList>
         &nbsp;&nbsp;
-        <asp:LinkButton ID="FetchAlbums" runat="server">Fetch Albums</asp:LinkButton>
+        <asp:LinkButton ID="FetchAlbums" runat="server" CausesValidation="false">Fetch Albums</asp:LinkButton>
         <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
         <br />
         <asp:GridView ID="AlbumList" runat="server" DataSourceID="AlbumListODS" AllowPaging="true" PageSize="5"
-            CssClass="table table-striped">
+            CssClass="table table-striped" OnSelectedIndexChanged="AlbumList_SelectedIndexChanged">
             <%-- More Gridview Styling: --%>
             <%--BorderStyle="None" GridLines="Horizontal"--%>
             <Columns>
                 <asp:CommandField SelectText="View"
-                    ShowSelectButton="true" />
+                    ShowSelectButton="true" CausesValidation="false" />
                 <asp:TemplateField HeaderText="Album">
                     <ItemTemplate>
                         <asp:Label ID="AlbumTitle" runat="server" Text='<%# Eval("Title") %>'></asp:Label>
@@ -41,7 +41,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Label">
                     <ItemTemplate>
-                        <asp:Label ID="Title" runat="server" Text='<%# Eval("ReleaseLabel") %>'></asp:Label>
+                        <asp:Label ID="ReleaseLabel" runat="server" Text='<%# Eval("ReleaseLabel") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -52,6 +52,7 @@
         <br />
         <asp:Label ID="Label2" runat="server" Text="Album ID"></asp:Label>
         &nbsp;&nbsp;
+
        <asp:Label ID="EditAlbumID" runat="server"></asp:Label>
         <br />
         <asp:Label ID="Label3" runat="server" Text="Title"></asp:Label>
@@ -72,6 +73,13 @@
         &nbsp;&nbsp;
        <asp:TextBox ID="EditReleaseLabel" runat="server"></asp:TextBox>
         <br />
+        <br />
+        <fieldset>
+            <asp:LinkButton ID="Add_Button" runat="server" OnClick="Add_Button_Click"> Add </asp:LinkButton> &nbsp; &nbsp;
+            <asp:LinkButton ID="Update_Button" runat="server" OnClick="Update_Button_Click"> Update</asp:LinkButton> &nbsp; &nbsp;
+            <asp:LinkButton ID="Remove_Button" runat="server" OnClientClick="Are You Sure You Wish to Remove This Album From the Collection?" 
+                CausesValidation="false" OnClick="Remove_Button_Click"> Remove </asp:LinkButton> &nbsp; &nbsp;
+        </fieldset>
     </div>
     <asp:ObjectDataSource ID="AlbumListODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Album_GetByArtist" TypeName="ChinookSystem.BLL.AlbumController">
         <SelectParameters>
