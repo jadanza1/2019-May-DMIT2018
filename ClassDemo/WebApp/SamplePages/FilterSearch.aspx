@@ -11,9 +11,20 @@
         This page will use various form control. This page will Review event driven logic.
     </blockquote>
     <div class="col-md-offset-3">
-       
+
         <br />
         <br />
+        <div>
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="alert alert-info"
+                HeaderText="Please Correct these following Information" />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="EditTitleOfAlbum"
+                ErrorMessage="Title Is Required" Display="None" />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                ControlToValidate="EditYear" Display="None" 
+                MinimumValue="1950" MaximumValue="2019"
+                ErrorMessage="Year must be between 1950 and 2019" />
+
+        </div>
         <asp:Label ID="Label1" runat="server" Text="Select an Artist"></asp:Label>
         &nbsp;&nbsp;
         <asp:DropDownList ID="ArtistList" runat="server">
@@ -62,13 +73,12 @@
         <br />
         <asp:Label ID="Label4" runat="server" Text="Artist"></asp:Label>
         &nbsp;&nbsp;
-        <asp:DropDownList ID="EditAlbumArtistList" runat="server" DataSourceID="AlbumArtistListODS" DataTextField="Name" DataValueField="ArtistId" >
-
+        <asp:DropDownList ID="EditAlbumArtistList" runat="server" DataSourceID="AlbumArtistListODS" DataTextField="Name" DataValueField="ArtistId">
         </asp:DropDownList>
         <br />
         <asp:Label ID="Label5" runat="server" Text="Year:"></asp:Label>
         &nbsp;&nbsp;
-       <asp:TextBox ID="EditYear" runat="server"></asp:TextBox>
+       <asp:TextBox ID="EditYear" runat="server" type="integer"></asp:TextBox>
         <br />
         <asp:Label ID="Label6" runat="server" Text="Label:"></asp:Label>
         &nbsp;&nbsp;
@@ -76,10 +86,13 @@
         <br />
         <br />
         <fieldset>
-            <asp:LinkButton ID="Add_Button" runat="server" OnClick="Add_Button_Click"> Add </asp:LinkButton> &nbsp; &nbsp;
-            <asp:LinkButton ID="Update_Button" runat="server" OnClick="Update_Button_Click"> Update</asp:LinkButton> &nbsp; &nbsp;
-            <asp:LinkButton ID="Remove_Button" runat="server" OnClientClick="return confirm('Are You Sure You Wish to Remove This Album From the Collection?')" 
-                CausesValidation="false" OnClick="Remove_Button_Click"> Remove </asp:LinkButton> &nbsp; &nbsp;
+            <asp:LinkButton ID="Add_Button" runat="server" OnClick="Add_Button_Click"> Add </asp:LinkButton>
+            &nbsp; &nbsp;
+            <asp:LinkButton ID="Update_Button" runat="server" OnClick="Update_Button_Click"> Update</asp:LinkButton>
+            &nbsp; &nbsp;
+            <asp:LinkButton ID="Remove_Button" runat="server" OnClientClick="return confirm('Are You Sure You Wish to Remove This Album From the Collection?')"
+                CausesValidation="false" OnClick="Remove_Button_Click"> Remove </asp:LinkButton>
+            &nbsp; &nbsp;
         </fieldset>
     </div>
     <asp:ObjectDataSource ID="AlbumListODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Album_GetByArtist" TypeName="ChinookSystem.BLL.AlbumController">

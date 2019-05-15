@@ -56,12 +56,13 @@ namespace WebApp.SamplePages
                 }
                 else
                 {
-
+               
                     EditAlbumID.Text = datainfo.AlbumId.ToString();
                     EditTitleOfAlbum.Text = datainfo.Title;
                     EditAlbumArtistList.SelectedValue = datainfo.ArtistId.ToString();
                     EditYear.Text = datainfo.ReleaseYear.ToString();
-                    EditReleaseLabel.Text = datainfo.ReleaseLabel == null ? "" : datainfo.ReleaseLabel; 
+                    EditReleaseLabel.Text = datainfo.ReleaseLabel == null ? "" : datainfo.ReleaseLabel;
+
                 }
             }, "Album Search", "View Album Details");
 
@@ -78,17 +79,74 @@ namespace WebApp.SamplePages
 
         protected void Add_Button_Click(object sender, EventArgs e)
         {
+            Album newAlbum = BuildAlbumFromUserInput();
+           if(IsValid)
+            {
+                MessageUserControl.TryRun(() =>
+                {
+                    var controller = new AlbumController();
+                    int newAlbumId = controller.Album_Add(newAlbum);
 
+                    //EditAlbumArtistList.SelectedValue = newAlbumId.ToString(); //Might not be necessary. Double Check
+                    EditAlbumID.Text = newAlbumId.ToString();
+                },"Album Add", "Album Added Successfully");
+            }
         }
 
         protected void Update_Button_Click(object sender, EventArgs e)
         {
+            int id;
+            if(IsValid && int.TryParse(EditAlbumID.Text, out id))
+            {
+                MessageUserControl.TryRun(() =>
+                {
+                    Album updateAlbum = BuildAlbumFromUserInput();
+                    updateAlbum.AlbumId = id;
+                    var controller = new AlbumController();
+                    int updatedAlbumId = controller.Album_Update(updateAlbum);
 
+                    //EditAlbumArtistList.SelectedValue = newAlbumId.ToString(); //Might not be necessary. Double Check
+                    EditAlbumID.Text = updateAlbum.ToString();
+                }, "Album Update", "Album Updated Successfully");
+            }
         }
 
         protected void Remove_Button_Click(object sender, EventArgs e)
         {
-
+            int id;
+            if (int.TryParse(EditAlbumID.Text, out id))
+            {
+                MessageUserControl.TryRun(() =>
+                {
+                    var controller = new AlbumController();
+                     controller.Album_Delete(id);
+                    ClearControls();
+                    //EditAlbumArtistList.SelectedValue = newAlbumId.ToString(); //Might not be necessary. Double Check
+                }, "Album Remove", "Album Removed Successfully");
+            }
         }
+
+        private Album BuildAlbumFromUserInput()
+        {
+            bool customIsValid = true;
+            Album item = new Album();
+
+            item.Title = EditTitleOfAlbum.Text;
+            if (EditAlbumArtistList.SelectedIndex == -1) //Might need to be changed when empty artist field is added.
+            {
+                customIsValid = false;
+                throw new Exception("Please Select an Artist");
+            }
+            else
+            {
+                item.ArtistId = int.Parse(EditAlbumArtistList.SelectedValue);
+                //throw new Exception("The selected artist ID is" + EditAlbumArtistList.SelectedValue);
+            }
+            item.ReleaseYear = int.Parse(EditYear.Text); // maybe change to just int in the textbox
+            item.ReleaseLabel = EditReleaseLabel.Text;
+
+            return item;
+        }
+
     }
 }
