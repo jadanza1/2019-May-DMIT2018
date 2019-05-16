@@ -19,6 +19,7 @@ namespace WebApp.SamplePages
             if (!Page.IsPostBack)
             {
                 BindArtistList();
+                
             }
 
         }
@@ -100,6 +101,7 @@ namespace WebApp.SamplePages
             {
                 MessageUserControl.TryRun(() =>
                 {
+                   
                     Album updateAlbum = BuildAlbumFromUserInput();
                     updateAlbum.AlbumId = id;
                     var controller = new AlbumController();
@@ -107,6 +109,7 @@ namespace WebApp.SamplePages
 
                     //EditAlbumArtistList.SelectedValue = newAlbumId.ToString(); //Might not be necessary. Double Check
                     EditAlbumID.Text = updateAlbum.ToString();
+                   
                 }, "Album Update", "Album Updated Successfully");
             }
         }
@@ -128,13 +131,13 @@ namespace WebApp.SamplePages
 
         private Album BuildAlbumFromUserInput()
         {
-            bool customIsValid = true;
+            //bool customIsValid = true;
             Album item = new Album();
 
             item.Title = EditTitleOfAlbum.Text;
             if (EditAlbumArtistList.SelectedIndex == -1) //Might need to be changed when empty artist field is added.
             {
-                customIsValid = false;
+                //customIsValid = false;
                 throw new Exception("Please Select an Artist");
             }
             else

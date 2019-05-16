@@ -1,0 +1,17 @@
+Right click entities
+Visual C# Items
+ > Data
+Select Entity Data Model
+Enter Model Name - Use the name of your context class
+Select Code First from Database
+Use the name for connection settings as the Name of the Database
+Then Select Tables
+	select dbo
+		Select the tables you need
+Click Finish
+
+Transfter the Context Class 
+Fix the namespace of the Context Class
+Add additional namespace to reference the Entties that were created
+
+Add customized messages for the Entity Validations.

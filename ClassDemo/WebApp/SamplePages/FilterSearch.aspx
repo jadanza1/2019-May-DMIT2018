@@ -19,7 +19,7 @@
                 HeaderText="Please Correct these following Information" />
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="EditTitleOfAlbum"
                 ErrorMessage="Title Is Required" Display="None" />
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+            <asp:RequiredFieldValidator ID="YearValidator" runat="server"
                 ControlToValidate="EditYear" Display="None" 
                 MinimumValue="1950" MaximumValue="2019"
                 ErrorMessage="Year must be between 1950 and 2019" />

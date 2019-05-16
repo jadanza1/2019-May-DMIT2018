@@ -1,69 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-#region Additional Namespaces
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-#endregion
-
 namespace ChinookSystem.Data.Entities
 {
-    [Table("Albums")]
-    public class Album
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    public partial class Album
     {
-        private string _ReleaseLabel;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Album()
+        {
+            Tracks = new HashSet<Track>();
+        }
 
-        [Key]
         public int AlbumId { get; set; }
-        [Required(ErrorMessage = "Title Is Required")]
-        [StringLength(160, ErrorMessage = "Title is Limited To 160 characters")]
+
+        [Required]
+        [StringLength(160)]
         public string Title { get; set; }
+
         public int ArtistId { get; set; }
-        [Range(1950, 2019, ErrorMessage = "Release Year Must be Between 1950 and Today")] // will be fixed. should be 1950 - Datetime.Today.Now
+
         public int ReleaseYear { get; set; }
-        [StringLength(50, ErrorMessage = "Release Label Limited to 50 characters")]
-        public string ReleaseLabel
-        {
-            get
-            {
-                return _ReleaseLabel;
-            }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    _ReleaseLabel = null;
-                }
-                else
-                {
-                    _ReleaseLabel = value;
-                }
-            }
-        }
 
-        [NotMapped]
-        public string LabelYear
-        {
-            get
-            {
-                if(string.IsNullOrEmpty(ReleaseLabel))
-                {
-                    return "Unknown Label (" + ReleaseYear.ToString() + ")";
-                }
-                else
-                {
-                    return ReleaseLabel + " (" + ReleaseYear.ToString() + ")";
-                }
-            }
-        }
+        [StringLength(50)]
+        public string ReleaseLabel { get; set; }
 
-        //navigational properties
-        //these enables the usage of joins in multile tables.
         public virtual Artist Artist { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Track> Tracks { get; set; }
     }
-
 }

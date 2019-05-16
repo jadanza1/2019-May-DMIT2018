@@ -220,6 +220,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="SamplePages\AlbumCRUD_ODS.aspx" />
     <Content Include="SamplePages\FilterSearch.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -393,6 +394,13 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SamplePages\AlbumCRUD_ODS.aspx.cs">
+      <DependentUpon>AlbumCRUD_ODS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\AlbumCRUD_ODS.aspx.designer.cs">
+      <DependentUpon>AlbumCRUD_ODS.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SamplePages\FilterSearch.aspx.cs">
       <DependentUpon>FilterSearch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
