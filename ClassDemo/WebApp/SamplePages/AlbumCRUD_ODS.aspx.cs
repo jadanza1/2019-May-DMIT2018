@@ -13,5 +13,15 @@ namespace WebApp.SamplePages
         {
 
         }
+
+        protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
+
+        protected void AlbumListODS_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+
+        }
     }
 }
