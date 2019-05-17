@@ -22,13 +22,13 @@ namespace WebApp.SamplePages {
         protected global::DMIT2018Common.UserControls.MessageUserControl MessageUserControl;
         
         /// <summary>
-        /// AlbumListODS control.
+        /// AlbumsListODS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource AlbumListODS;
+        protected global::System.Web.UI.WebControls.ObjectDataSource AlbumsListODS;
         
         /// <summary>
         /// ArtistListODS control.
@@ -40,12 +40,12 @@ namespace WebApp.SamplePages {
         protected global::System.Web.UI.WebControls.ObjectDataSource ArtistListODS;
         
         /// <summary>
-        /// ListView1 control.
+        /// AlbumList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView ListView1;
+        protected global::System.Web.UI.WebControls.ListView AlbumList;
     }
 }

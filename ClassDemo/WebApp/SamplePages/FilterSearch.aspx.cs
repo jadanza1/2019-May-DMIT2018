@@ -86,10 +86,13 @@ namespace WebApp.SamplePages
                 MessageUserControl.TryRun(() =>
                 {
                     var controller = new AlbumController();
-                    int newAlbumId = controller.Album_Add(newAlbum);
-
+                    int albumId = controller.Album_Add(newAlbum);
+                    
                     //EditAlbumArtistList.SelectedValue = newAlbumId.ToString(); //Might not be necessary. Double Check
-                    EditAlbumID.Text = newAlbumId.ToString();
+                    EditAlbumID.Text = albumId.ToString();
+                    ArtistList.SelectedValue = newAlbum.ArtistId.ToString(); 
+                    AlbumList.DataBind();
+                    AlbumList.Visible = true;
                 },"Album Add", "Album Added Successfully");
             }
         }
@@ -105,7 +108,16 @@ namespace WebApp.SamplePages
                     Album updateAlbum = BuildAlbumFromUserInput();
                     updateAlbum.AlbumId = id;
                     var controller = new AlbumController();
-                    int updatedAlbumId = controller.Album_Update(updateAlbum);
+                    int rowsAffected = controller.Album_Update(updateAlbum);
+                    if(rowsAffected == 0)
+                    {
+                        throw new Exception("Album no longer available. Refresh your page.");
+                    }
+                    else
+                    {
+                        ArtistList.SelectedValue = updateAlbum.ArtistId.ToString();
+                        AlbumList.DataBind();
+                    }
 
                     //EditAlbumArtistList.SelectedValue = newAlbumId.ToString(); //Might not be necessary. Double Check
                     EditAlbumID.Text = updateAlbum.ToString();
@@ -122,8 +134,17 @@ namespace WebApp.SamplePages
                 MessageUserControl.TryRun(() =>
                 {
                     var controller = new AlbumController();
-                     controller.Album_Delete(id);
+                    int rowAffected = controller.Album_Delete(id);
                     ClearControls();
+                    if(rowAffected == 0)
+                    {
+                        throw new Exception("Album No Longer Avaiable. Please Refresh your page.");
+                    }
+                    else
+                    {
+                        EditAlbumID.Text = string.Empty;
+                        AlbumList.DataBind();
+                    }
                     //EditAlbumArtistList.SelectedValue = newAlbumId.ToString(); //Might not be necessary. Double Check
                 }, "Album Remove", "Album Removed Successfully");
             }
