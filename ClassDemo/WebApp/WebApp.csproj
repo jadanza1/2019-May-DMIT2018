@@ -221,8 +221,10 @@
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="SamplePages\AlbumCRUD_ODS.aspx" />
+    <Content Include="SamplePages\AlbumSongRepeater.aspx" />
     <Content Include="SamplePages\FilterSearch.aspx" />
     <Content Include="SamplePages\LinqQueryODS.aspx" />
+    <Content Include="SamplePages\RepeaterODS.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -402,6 +404,13 @@
     <Compile Include="SamplePages\AlbumCRUD_ODS.aspx.designer.cs">
       <DependentUpon>AlbumCRUD_ODS.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SamplePages\AlbumSongRepeater.aspx.cs">
+      <DependentUpon>AlbumSongRepeater.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\AlbumSongRepeater.aspx.designer.cs">
+      <DependentUpon>AlbumSongRepeater.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SamplePages\FilterSearch.aspx.cs">
       <DependentUpon>FilterSearch.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -415,6 +424,13 @@
     </Compile>
     <Compile Include="SamplePages\LinqQueryODS.aspx.designer.cs">
       <DependentUpon>LinqQueryODS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SamplePages\RepeaterODS.aspx.cs">
+      <DependentUpon>RepeaterODS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\RepeaterODS.aspx.designer.cs">
+      <DependentUpon>RepeaterODS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
