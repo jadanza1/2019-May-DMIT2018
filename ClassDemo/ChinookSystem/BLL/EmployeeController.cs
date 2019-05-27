@@ -30,7 +30,7 @@ namespace ChinookSystem.BLL
                               {
                                   Name = emp.LastName + ", " + emp.FirstName,
                                   EmpTitle = emp.Title,
-                                  clientCount = emp.Customers.Count(),
+                                  ClientCount = emp.Customers.Count(),
                                   ClientList = (from cus in emp.Customers
                                                 orderby cus.LastName, cus.FirstName
                                                 select new Client
@@ -39,7 +39,7 @@ namespace ChinookSystem.BLL
                                                     Phone = cus.Phone
                                                 }).ToList()
                               };
-                return null; //change this
+                return empList.ToList(); ; //change this
             }
         }
     }

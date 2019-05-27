@@ -15,7 +15,7 @@ namespace ChinookSystem.Data.DTOs
     {
         public string Name { get; set; }
         public string EmpTitle { get; set; }
-        public int clientCount { get; set; }
+        public int ClientCount { get; set; }
         public List<Client> ClientList { get; set; }
     }
 }

@@ -22,21 +22,21 @@ namespace WebApp.SamplePages {
         protected global::DMIT2018Common.UserControls.MessageUserControl MessageUserControl;
         
         /// <summary>
-        /// AlbumArtistList control.
+        /// AlbumArtistsList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView AlbumArtistList;
+        protected global::System.Web.UI.WebControls.ListView AlbumArtistsList;
         
         /// <summary>
-        /// AlbumstArtistListODS control.
+        /// AlbumArtistsListODS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource AlbumstArtistListODS;
+        protected global::System.Web.UI.WebControls.ObjectDataSource AlbumArtistsListODS;
     }
 }
