@@ -1,10 +1,4 @@
-<Query Kind="Expression">
-  <Connection>
-    <ID>c1a07453-b2f4-488e-9263-4e75afa78a5c</ID>
-    <Server>.</Server>
-    <Database>Chinook</Database>
-  </Connection>
-</Query>
+<Query Kind="Expression" />
 
 //joins can be used where navigational properties DO NOT exists
 //joins can be used between a associated entities 
@@ -25,7 +19,7 @@
 
 from xRightSide  in Artists
 join yLeftSide in Albums
-on xRightSide.ArtistId equals yLeftSide.ArtistId
+on xRightSide.ArtistId equals yLeftSide.ArtistId 
 select new
 {
 	title = yLeftSide.Title,
@@ -34,4 +28,22 @@ select new
 	artist = xRightSide.Name,
 	trackCount = yLeftSide.Tracks.Count()
 }
-//OUTER JOIN
+//OUTER JOIN between two tables
+// use a group to hold the result of the join
+//use .DefaultIfempty() to handle the missing data of the joins
+
+from xRightSide  in Artists
+join yLeftSide in Albums
+on xRightSide.ArtistId equals yLeftSide.ArtistId into gTemp
+from p in gTemp.DefaultIfEmpty()
+select new
+{
+	artist = xRightSide.Name,
+	title = p.Title ==  null ? "" : p.Title,
+	year = p.ReleaseYear == null ? "" : p.ReleaseYear.ToString(),
+	label = p.ReleaseLabel == null ? "Unknown " : p.ReleaseLabel,
+	trackCount = p.Title == null ? 0 : p.Tracks.Count()
+	
+	// OR 
+	// 	trackCount = p.Tracks.Count()
+}
