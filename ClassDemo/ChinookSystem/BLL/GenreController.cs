@@ -8,12 +8,31 @@ using System.Threading.Tasks;
 using ChinookSystem.DAL;
 using ChinookSystem.Data.Entities;
 using System.ComponentModel;
+using ChinookSystem.Data.POCOs;
 #endregion
 namespace ChinookSystem.BLL
 {
     [DataObject]
     public class GenreController
     {
+   
+            [DataObjectMethod(DataObjectMethodType.Select, false)]
+            public List<SelectionList> List_GenreNames()
+            {
+                using (var context = new ChinookSystemContext())
+                {
+                    var results = from x in context.Genres
+                                  orderby x.Name
+                                  select new SelectionList
+                                  {
+                                      IDValueField = x.GenreId,
+                                      DisplayText = x.Name
+                                  };
+                    return results.ToList();
+                }
+            }
+        
+
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Genre> Genre_List()
         {

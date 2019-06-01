@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ChinookSystem.DAL;
 using ChinookSystem.Data.Entities;
 using System.ComponentModel;
+using ChinookSystem.Data.POCOs;
 #endregion
 namespace ChinookSystem.BLL
 {
@@ -23,13 +24,21 @@ namespace ChinookSystem.BLL
             }
         }
 
-        //[DataObjectMethod(DataObjectMethodType.Select, false)]
-        //public Album MediaType_Get(int mediaTypeId)
-        //{
-        //    using (var context = new ChinookSystemContext())
-        //    {
-        //        return context.MediaTypes.Find(mediaTypeId);
-        //    }
-        //}
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<SelectionList> List_MediaTypeNames()
+        {
+            using (var context = new ChinookSystemContext())
+            {
+                var results = from x in context.MediaTypes
+                              orderby x.Name
+                              select new SelectionList
+                              {
+                                  IDValueField = x.MediaTypeId,
+                                  DisplayText = x.Name
+                              };
+                return results.ToList();
+            }
+        }
+
     }
 }
