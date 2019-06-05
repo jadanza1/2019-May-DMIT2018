@@ -1,8 +1,10 @@
 <Query Kind="Expression">
   <Connection>
-    <ID>c1a07453-b2f4-488e-9263-4e75afa78a5c</ID>
+    <ID>5b3e2a72-84b0-4f63-a42f-6916eac3f401</ID>
+    <Persist>true</Persist>
     <Server>.</Server>
     <Database>Chinook</Database>
+    <ShowServer>true</ShowServer>
   </Connection>
 </Query>
 
@@ -79,7 +81,7 @@ where t.Album.ReleaseYear > 2010
 group t by t.Genre.Name into gTemp
 select new
 {
-	genre =  gTemp.Key,
+	genre =  gTemp.Key.Name,
 	mumberof = gTemp.Count()
 }
 

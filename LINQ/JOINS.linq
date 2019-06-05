@@ -1,4 +1,12 @@
-<Query Kind="Expression" />
+<Query Kind="Expression">
+  <Connection>
+    <ID>5b3e2a72-84b0-4f63-a42f-6916eac3f401</ID>
+    <Persist>true</Persist>
+    <Server>.</Server>
+    <Database>Chinook</Database>
+    <ShowServer>true</ShowServer>
+  </Connection>
+</Query>
 
 //joins can be used where navigational properties DO NOT exists
 //joins can be used between a associated entities 
@@ -47,3 +55,37 @@ select new
 	// OR 
 	// 	trackCount = p.Tracks.Count()
 }
+
+
+from xRightSide in Artists
+join yLeftSide in Albums
+on xRightSide.ArtistId equals yLeftSide.ArtistId into gTemp
+from p in gTemp.DefaultIfEmpty()
+select new
+{
+	artist = xRightSide.Name,
+	title = p.Title == null ?  "" : p.Title,
+	year = p.ReleaseYear == null ? "" : p.ReleaseYear.ToString(),
+	label = p.ReleaseLabel == null? "Unknown" : p.ReleaseLabel,
+	trackCount = p.Title == null ? 0 : p.Tracks.Count()
+}
+
+//join 3 table Experiment 
+from artistSide in Artists
+join  albumSide in Albums
+on artistSide.ArtistId equals albumSide.ArtistId
+join trackSide in Tracks
+on albumSide.AlbumId equals trackSide.AlbumId
+select new
+{
+	Artist = artistSide.Name,
+	Album = albumSide.Artist,
+	GenreId = trackSide.AlbumId
+}
+
+
+//var or = from xRightSide in Orders 	
+//		join yLeftSide in Stores 
+//		on xRightSide.StoreID equals yLeftSide.StoreID 
+//		join zRightSide in Pickers on yLeftSide.StoreID equals zRightSide.StoreID into gTemp
+//		select zRightSide ;
