@@ -52,14 +52,16 @@ namespace ChinookSystem.BLL
                                      where x.Name.Equals(playlistname) && x.UserName.Equals(username)
                                      select x).FirstOrDefault();
                 PlaylistTrack newtrack = null;
+                int tracknumber = 0;
+
                 // this list is required for  use by the BusinessRuleException of the MessageUserControl
                 List<string> reasons = new List<string>(); 
-
-                int tracknumber = 0;
+        
                 //Determine if the playlist ("parent") instance needs to be created.
                 if (exists == null)
                 {
                     //create a new playlist
+                    exists = new Playlist(); 
                     exists.Name = playlistname;
                     exists.UserName = username;
                     // the .Add(item) ONLY stages your record for adding to the database
@@ -101,6 +103,36 @@ namespace ChinookSystem.BLL
                     {
                         //Part Two
                         //adding the new track to the PlaylistTracks table.
+
+                        // create a new instance of the PlaylistTrack
+                        newtrack = new PlaylistTrack();
+                        //load with known data:
+                        newtrack.TrackId = trackid;
+                        newtrack.TrackNumber = tracknumber;
+
+                        //Currently, the playlist is unknown. If the playlist is brand new.
+                        //NOTE: using navigational properties, one can let
+                        //      the Hashset of Playlist handle the PlaylistId
+                        //      pkey Value.
+                        // adding via the navigational property will have the 
+                        //      system enter the parent pkey for the corresponding
+                        //      fkey value.
+                        //  In PlaylistTrack, PlaylistId is BOTH the pkey and fkey.
+                        // During the .SaveChanges(), the PlaylistId will be filled.
+
+                        exists.PlaylistTracks.Add(newtrack);
+
+                        //committing your work
+                        //only one comit for the transaction,
+                        //During the .SaveChanges(), the data is added phyisically 
+                        //   to your database at which time pkey (identity) is 
+                        //   generated.
+                        //The order of actions has been done by your logic.
+                        //The Playlist pkey will be generated
+                        //this value will be placed in the fkey of the child record.
+                        //the child record will be placed in its table.
+                        context.SaveChanges();
+
                     }
 
                 }
@@ -112,6 +144,83 @@ namespace ChinookSystem.BLL
             using (var context = new ChinookSystemContext())
             {
                 //code to go here 
+                //since data can be accessed by multiple individuals at the same time
+                //  your BLL method should do validation to ensure data coming in is still appropriate.
+                
+                var exists = context.Playlists.Where(x => x.UserName.Equals(username) &&
+                                x.Name.Equals(playlistname)).Select(x => x).FirstOrDefault();
+                //playlist no longer exists
+                if(exists == null)
+                {
+                    throw new Exception("Play List has been removed from files.");
+                }
+                else
+                {
+                    var movetrack = exists.PlaylistTracks.Where(x => x.TrackId == trackid).Select(x => x).FirstOrDefault();
+                    //playlist track no longer exist
+                    if(movetrack == null)
+                    {
+                        throw new Exception("Play list track has been removed from files. 1");
+                    }
+                    else
+                    {
+                        PlaylistTrack othertrack = null;
+                        //determine direction
+                        if(direction.Equals("up"))
+                        {
+                            if (movetrack.TrackNumber == 1)
+                            {
+                                throw new Exception("Already at Top. Play list cannot be moved. ");
+                            }
+                            else
+                            {
+                                //setup for track movement.
+                                othertrack = (from x in exists.PlaylistTracks
+                                              where x.TrackNumber.Equals(movetrack.TrackNumber - 1)
+                                              select x).FirstOrDefault();
+                                if(othertrack == null)
+                                {
+                                    throw new Exception("Playlist tracks have been altered. Unable to complete move.");
+                                }
+                                else
+                                {
+                                    movetrack.TrackNumber -= 1;
+                                    othertrack.TrackNumber += 1;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (movetrack.TrackNumber == 1)
+                            {
+                                throw new Exception("Already at Bottom. Play list cannot be moved. ");
+                            }
+                            else
+                            {
+                                //setup for track movement.
+                                othertrack = (from x in exists.PlaylistTracks
+                                              where x.TrackNumber.Equals(movetrack.TrackNumber + 1)
+                                              select x).FirstOrDefault();
+                                if (othertrack == null)
+                                {
+                                    throw new Exception("Playlist tracks have been altered. Unable to complete move.");
+                                }
+                                else
+                                {
+                                    movetrack.TrackNumber += 1;
+                                    othertrack.TrackNumber -= 1;
+                                }
+                            }
+                           
+                        }//oem up or down
+                            // staging
+                            //update
+
+                        context.Entry(movetrack).Property(y => y.TrackNumber).IsModified = true;
+                        context.Entry(othertrack).Property(y => y.TrackNumber).IsModified = true;
+                        context.SaveChanges();
+                    }
+                }
 
             }
         }//eom
