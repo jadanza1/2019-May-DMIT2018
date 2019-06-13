@@ -53,9 +53,9 @@ namespace WebApp.Security
                 UserName = customerUser,
                 Email = customerEmail,
                 CustomerId = 4
-            }, adminPassword);
+            }, customerPassword);
             if (result.Succeeded)
-                userManager.AddToRole(userManager.FindByName(customerUser).Id, customerUser);
+                userManager.AddToRole(userManager.FindByName(customerUser).Id, customerRole);
 
 
             #endregion
