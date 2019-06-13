@@ -28,8 +28,8 @@ namespace WebApp.Account
             if (IsValid)
             {
                 // Validate the user password
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
+                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>(); //gets instance of user manager
+                var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>(); //gets intance of signin manager
 
                 // This doen't count login failures towards account lockout
                 // To enable password failures to trigger lockout, change to shouldLockout: true
