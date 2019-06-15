@@ -92,6 +92,9 @@
                                     <asp:MenuItem Text="Linq Query ODS" NavigateUrl="~/SamplePages/LinqQueryODS"></asp:MenuItem>
                                     <asp:MenuItem Text="Playlist OLTP" NavigateUrl="~/SamplePages/ManagePlaylist"></asp:MenuItem>
                                 </asp:MenuItem>
+                            <asp:MenuItem Text="Administrator" NavigateUrl="~/Security/SecurityAdmin.aspx">
+
+                            </asp:MenuItem>
                         </Items>
 
                     </asp:Menu>
