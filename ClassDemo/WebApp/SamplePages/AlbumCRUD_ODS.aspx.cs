@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChinookSystem.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,9 +25,9 @@ namespace WebApp.SamplePages
 
         }
 
-        protected void AlbumList_ItemInserting()
+        protected void AlbumList_ItemInserting(object sender, ListViewInsertEventArgs e)
         {
-
+            e.Values[nameof(Album.ReleaseLabel)] = "TBA";
         }
     }
 }

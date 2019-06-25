@@ -25,7 +25,7 @@
         TypeName="ChinookSystem.BLL.ArtistController">
     </asp:ObjectDataSource>
 
-    <asp:ListView ID="AlbumList" runat="server" DataSourceID="AlbumsListODS" InsertItemPosition="LastItem" DataKeyNames="AlbumId">
+    <asp:ListView ID="AlbumList" runat="server" DataSourceID="AlbumsListODS" InsertItemPosition="LastItem" DataKeyNames="AlbumId" OnItemInserting="AlbumList_ItemInserting">
         <AlternatingItemTemplate>
             <tr style="background-color: #FFFFFF; color: #284775;">
                 <td>
