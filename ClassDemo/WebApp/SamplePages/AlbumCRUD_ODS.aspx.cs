@@ -23,5 +23,10 @@ namespace WebApp.SamplePages
         {
 
         }
+
+        protected void AlbumList_ItemInserting()
+        {
+
+        }
     }
 }
